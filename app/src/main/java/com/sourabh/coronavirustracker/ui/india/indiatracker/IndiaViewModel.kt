@@ -45,4 +45,19 @@ class IndiaViewModel(private val repo: MainRepository) : ViewModel() {
     private fun getDistrictData() {
 
     }
+
+    /**
+     * Navigate to Details Fragment
+     */
+    private val _navigateToDetailsFragment = MutableLiveData<StatewiseDetails>()
+    val navigateToIndianFragment: LiveData<StatewiseDetails>
+        get() = _navigateToDetailsFragment
+
+    fun listItemClicked(statewise: StatewiseDetails) {
+        _navigateToDetailsFragment.value = statewise
+    }
+
+    fun navigationComplete() {
+        _navigateToDetailsFragment.value = null
+    }
 }

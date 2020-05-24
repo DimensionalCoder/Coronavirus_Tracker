@@ -8,5 +8,14 @@
         android:id="@+id/indiaFragment"
         android:name="com.sourabh.coronavirustracker.ui.india.indiatracker.IndiaFragment"
         android:label="fragment_india"
-        tools:layout="@layout/fragment_india"/>
+        tools:layout="@layout/fragment_india">
+        <action
+            android:id="@+id/action_indiaFragment_to_indiaDetailsFragment"
+            app:destination="@id/indiaDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/indiaDetailsFragment"
+        android:name="com.sourabh.coronavirustracker.ui.india.indiadetails.IndiaDetailsFragment"
+        android:label="fragment_india_details"
+        tools:layout="@layout/fragment_india_details" />
 </navigation>
