@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/indiaFragment">
+    <fragment
+        android:id="@+id/indiaFragment"
+        android:name="com.sourabh.coronavirustracker.ui.india.indiatracker.IndiaFragment"
+        android:label="fragment_india"
+        tools:layout="@layout/fragment_india"/>
+</navigation>
