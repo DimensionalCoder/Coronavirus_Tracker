@@ -33,7 +33,7 @@ class IndiaViewModel(private val repo: MainRepository) : ViewModel() {
             try {
                 val data = repo.getIndianData()
 
-//                data.filter { it.totalConfirmed != 0 }
+                data.filter { it.totalConfirmed != 0 }
 
                 _indianStatewiseDetails.postValue(Resource.SUCCESS(data))
             } catch (e: Exception) {
@@ -43,18 +43,42 @@ class IndiaViewModel(private val repo: MainRepository) : ViewModel() {
     }
 
     private fun getDistrictData() {
-
+        viewModelScope.launch {
+            try {
+                val data = repo.getDistrictData()
+                _indianDistrictData.postValue(data)
+            } catch (e: java.lang.Exception) {
+                _indianDistrictData.postValue(ArrayList())
+            }
+        }
     }
 
     /**
      * Navigate to Details Fragment
      */
     private val _navigateToDetailsFragment = MutableLiveData<StatewiseDetails>()
-    val navigateToIndianFragment: LiveData<StatewiseDetails>
-        get() = _navigateToDetailsFragment
 
-    fun listItemClicked(statewise: StatewiseDetails) {
-        _navigateToDetailsFragment.value = statewise
+    private val detailsData = MutableLiveData<Pair<StatewiseDetails, DistrictwiseDetails>>()
+    val navigateToIndianFragment: LiveData<Pair<StatewiseDetails, DistrictwiseDetails>>
+        get() = detailsData
+
+    fun listItemClicked(state: StatewiseDetails) {
+        _navigateToDetailsFragment.value = state
+
+        val listOfStateAndDistricts = _indianDistrictData.value
+
+        listOfStateAndDistricts?.let {
+            for (districtsOfState in listOfStateAndDistricts) {
+
+                /**
+                 * Using Pair to return both the values
+                 */
+                if (districtsOfState.state == state.stateOrUT) {
+                    detailsData.value = state to districtsOfState
+                }
+            }
+        }
+
     }
 
     fun navigationComplete() {
