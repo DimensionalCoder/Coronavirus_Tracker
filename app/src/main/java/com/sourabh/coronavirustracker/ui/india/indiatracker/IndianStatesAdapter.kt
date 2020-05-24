@@ -27,13 +27,14 @@ class IndianStatesAdapter(onCLickListener: OnItemClickListener) :
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (position == 0) {
-            R.layout.indian_total_list_item
-        } else {
-            R.layout.indian_list_item
-        }
-    }
+    override fun getItemViewType(position: Int): Int = R.layout.indian_list_item
+//    override fun getItemViewType(position: Int): Int {
+//        return if (position == 0) {
+//            R.layout.indian_total_list_item
+//        } else {
+//            R.layout.indian_list_item
+//        }
+//    }
 
     class OnItemClickListener(private val clickListener: (statewise: StatewiseDetails) -> Unit) {
         fun onClick(statewise: StatewiseDetails) {

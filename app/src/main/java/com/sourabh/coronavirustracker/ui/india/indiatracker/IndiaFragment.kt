@@ -1,12 +1,16 @@
 package com.sourabh.coronavirustracker.ui.india.indiatracker
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.sourabh.coronavirustracker.databinding.FragmentIndiaBinding
+import com.sourabh.coronavirustracker.network.Resource
 import com.sourabh.coronavirustracker.network.RetrofitBuilder
 import com.sourabh.coronavirustracker.repository.MainRepository
 
@@ -38,19 +42,54 @@ class IndiaFragment : Fragment() {
 
     private fun setUpRecyclerView(viewModel: IndiaViewModel) {
         val recyclerView = binding.indianRv
+
+        /**
+         * onClick() in the xml passes the statewise data to the OnItemClickListener class
+         * statewise data is passed into the viewModel every time the list item is clicked
+         */
         adapter = IndianStatesAdapter(
             IndianStatesAdapter.OnItemClickListener { statewise ->
                 viewModel.listItemClicked(statewise)
             }
         )
+
+        /**
+         *  To handle recyclerview position when orientation changes
+         */
+        adapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+
+        //  Prevents multiple clicks in the recyclerView
+        recyclerView.isMotionEventSplittingEnabled = false
+        recyclerView.setHasFixedSize(true)
+
+        // Prevent over scroll animation
+        recyclerView.overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+
+        recyclerView.adapter = adapter
     }
 
     private fun viewModelObservers(viewModel: IndiaViewModel) {
-        TODO("Not yet implemented")
+        viewModel.indianStatewiseDetails.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                when (it) {
+                    is Resource.LOADING -> Log.i("SFLHF", "FLJSFLKJF")
+                    is Resource.SUCCESS -> {
+                        Log.i("SUccess", "LSKFJFLSJ")
+                        adapter.submitList(it.data)
+                    }
+                    is Resource.FAILURE -> {
+                        Log.i("FAILLL", "FAILLED ${it.e}")
+                        adapter.submitList(ArrayList())
+                    }
+                }
+            }
+        })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.indianRv.adapter = null
         _binding = null
     }
 }

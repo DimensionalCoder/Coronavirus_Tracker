@@ -33,7 +33,7 @@ class IndiaViewModel(private val repo: MainRepository) : ViewModel() {
             try {
                 val data = repo.getIndianData()
 
-                data.filter { it.totalConfirmed != 0 }
+//                data.filter { it.totalConfirmed != 0 }
 
                 _indianStatewiseDetails.postValue(Resource.SUCCESS(data))
             } catch (e: Exception) {
