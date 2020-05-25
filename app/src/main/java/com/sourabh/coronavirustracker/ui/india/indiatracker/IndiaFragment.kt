@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.sourabh.coronavirustracker.databinding.FragmentIndiaBinding
 import com.sourabh.coronavirustracker.network.Resource
@@ -70,19 +71,32 @@ class IndiaFragment : Fragment() {
     }
 
     private fun viewModelObservers(viewModel: IndiaViewModel) {
+
         viewModel.indianStatewiseDetails.observe(viewLifecycleOwner, Observer {
             it?.let {
                 when (it) {
-                    is Resource.LOADING -> Log.i("SFLHF", "FLJSFLKJF")
+                    is Resource.LOADING -> Log.i("IndiaFragment", "Loading")
                     is Resource.SUCCESS -> {
-                        Log.i("SUccess", "LSKFJFLSJ")
                         adapter.submitList(it.data)
+                        Log.i("IndiaFragment", "Success ${it.data[0].stateOrUT}")
                     }
                     is Resource.FAILURE -> {
-                        Log.i("FAILLL", "FAILLED ${it.e}")
+                        Log.i("IndiaFragment", "Indian Data FAILED ${it.e}")
                         adapter.submitList(ArrayList())
                     }
                 }
+            }
+        })
+
+        viewModel.navigateToIndianFragment.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                findNavController().navigate(
+                    IndiaFragmentDirections.actionIndiaFragmentToIndiaDetailsFragment(
+                        it.first,
+                        it.second.toTypedArray()
+                    )
+                )
+                viewModel.navigationComplete()
             }
         })
     }

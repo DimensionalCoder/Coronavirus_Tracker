@@ -2,6 +2,7 @@
 
 package com.sourabh.coronavirustracker.ui.india.indiatracker
 
+import android.util.Log
 import androidx.recyclerview.widget.DiffUtil
 import com.sourabh.coronavirustracker.R
 import com.sourabh.coronavirustracker.model.StatewiseDetails
@@ -27,17 +28,20 @@ class IndianStatesAdapter(onCLickListener: OnItemClickListener) :
         }
     }
 
-    override fun getItemViewType(position: Int): Int = R.layout.indian_list_item
-//    override fun getItemViewType(position: Int): Int {
-//        return if (position == 0) {
-//            R.layout.indian_total_list_item
-//        } else {
-//            R.layout.indian_list_item
-//        }
-//    }
+    /**
+     * Set the layouts here
+     */
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 0) {
+            R.layout.indian_total_list_item
+        } else {
+            R.layout.indian_list_item
+        }
+    }
 
     class OnItemClickListener(private val clickListener: (statewise: StatewiseDetails) -> Unit) {
         fun onClick(statewise: StatewiseDetails) {
+            Log.i("RVClickListener", "Item clicked: ${statewise.stateOrUT}")
             clickListener(statewise)
         }
     }

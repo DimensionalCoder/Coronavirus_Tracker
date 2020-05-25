@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/indiaFragment">
+
     <fragment
         android:id="@+id/indiaFragment"
         android:name="com.sourabh.coronavirustracker.ui.india.indiatracker.IndiaFragment"
@@ -13,9 +14,18 @@
             android:id="@+id/action_indiaFragment_to_indiaDetailsFragment"
             app:destination="@id/indiaDetailsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/indiaDetailsFragment"
         android:name="com.sourabh.coronavirustracker.ui.india.indiadetails.IndiaDetailsFragment"
         android:label="fragment_india_details"
-        tools:layout="@layout/fragment_india_details" />
+        tools:layout="@layout/fragment_india_details">
+        <argument
+            android:name="statewiseData"
+            app:argType="com.sourabh.coronavirustracker.model.StatewiseDetails" />
+        <argument
+            android:name="districtData"
+            app:argType="com.sourabh.coronavirustracker.model.Districts[]" />
+    </fragment>
+
 </navigation>

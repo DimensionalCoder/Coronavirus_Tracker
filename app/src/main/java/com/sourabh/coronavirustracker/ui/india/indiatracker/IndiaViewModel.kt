@@ -1,9 +1,11 @@
 package com.sourabh.coronavirustracker.ui.india.indiatracker
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sourabh.coronavirustracker.model.Districts
 import com.sourabh.coronavirustracker.model.DistrictwiseDetails
 import com.sourabh.coronavirustracker.model.StatewiseDetails
 import com.sourabh.coronavirustracker.network.Resource
@@ -23,65 +25,102 @@ class IndiaViewModel(private val repo: MainRepository) : ViewModel() {
     }
 
     private fun initData() {
-        getStateData()
-        getDistrictData()
-    }
 
-    private fun getStateData() {
         _indianStatewiseDetails.value = Resource.LOADING
+
         viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val data = repo.getIndianData()
-
-                data.filter { it.totalConfirmed != 0 }
-
-                _indianStatewiseDetails.postValue(Resource.SUCCESS(data))
-            } catch (e: Exception) {
-                _indianStatewiseDetails.postValue(Resource.FAILURE(e))
-            }
+            val (states, districtData) = getIndianData()
+            _indianStatewiseDetails.postValue(states)
+            _indianDistrictData.postValue(districtData)
         }
     }
 
-    private fun getDistrictData() {
-        viewModelScope.launch {
-            try {
-                val data = repo.getDistrictData()
-                _indianDistrictData.postValue(data)
-            } catch (e: java.lang.Exception) {
-                _indianDistrictData.postValue(ArrayList())
-            }
+    private suspend fun getIndianData(): Pair<Resource<List<StatewiseDetails>>, List<DistrictwiseDetails>> {
+        return try {
+            Log.i("IndiaViewModel", "Recalled")
+            val states = getStateData()
+            val stateAndDistricts = getDistrictData()
+            Resource.SUCCESS(states) to stateAndDistricts
+        } catch (e: Exception) {
+            Resource.FAILURE(e) to emptyList()
         }
+    }
+
+    private suspend fun getStateData(): List<StatewiseDetails> {
+        return repo.getIndianStateData()
+    }
+
+    private suspend fun getDistrictData(): List<DistrictwiseDetails> {
+        return repo.getDistrictData()
     }
 
     /**
      * Navigate to Details Fragment
      */
-    private val _navigateToDetailsFragment = MutableLiveData<StatewiseDetails>()
+    private val _navigateToDetailsFragment =
+        MutableLiveData<Pair<StatewiseDetails, List<Districts>>>()
 
-    private val detailsData = MutableLiveData<Pair<StatewiseDetails, DistrictwiseDetails>>()
-    val navigateToIndianFragment: LiveData<Pair<StatewiseDetails, DistrictwiseDetails>>
-        get() = detailsData
+    //    private val detailsData = MutableLiveData<Pair<StatewiseDetails, DistrictwiseDetails>>()
+    val navigateToIndianFragment: LiveData<Pair<StatewiseDetails, List<Districts>>>
+        get() = _navigateToDetailsFragment
 
     fun listItemClicked(state: StatewiseDetails) {
-        _navigateToDetailsFragment.value = state
 
         val listOfStateAndDistricts = _indianDistrictData.value
 
-        listOfStateAndDistricts?.let {
-            for (districtsOfState in listOfStateAndDistricts) {
+        viewModelScope.launch(Dispatchers.Default) {
 
-                /**
-                 * Using Pair to return both the values
-                 */
-                if (districtsOfState.state == state.stateOrUT) {
-                    detailsData.value = state to districtsOfState
-                }
+            listOfStateAndDistricts?.let {
+                val districtOfState =
+                    listOfStateAndDistricts.asSequence().filter { it.state == state.stateOrUT }
+                        .first()
+
+                _navigateToDetailsFragment.postValue(state to districtOfState.districtData)
             }
-        }
 
+//            listOfStateAndDistricts?.let {
+//                for (districtsOfState in listOfStateAndDistricts) {
+//
+//                    /**
+//                     * Using Pair to return both the values
+//                     */
+//                    if (districtsOfState.state == state.stateOrUT) {
+//                        _navigateToDetailsFragment.postValue(state to districtsOfState.districtData)
+//                    }
+//                }
+//
+//            }
+        }
     }
 
     fun navigationComplete() {
         _navigateToDetailsFragment.value = null
     }
 }
+
+
+//    private fun getStateData() {
+//        _indianStatewiseDetails.value = Resource.LOADING
+//        viewModelScope.launch(Dispatchers.IO) {
+//            try {
+//                val data = repo.getIndianStateData()
+//
+//                data.filter { it.totalConfirmed != 0 }
+//
+//                _indianStatewiseDetails.postValue(Resource.SUCCESS(data))
+//            } catch (e: Exception) {
+//                _indianStatewiseDetails.postValue(Resource.FAILURE(e))
+//            }
+//        }
+//    }
+//
+//    private fun getDistrictData() {
+//        viewModelScope.launch {
+//            try {
+//                val data = repo.getDistrictData()
+//                _indianDistrictData.postValue(data)
+//            } catch (e: java.lang.Exception) {
+//                _indianDistrictData.postValue(ArrayList())
+//            }
+//        }
+//    }
