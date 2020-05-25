@@ -2,18 +2,20 @@ package com.sourabh.coronavirustracker.ui.india.indiatracker
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.inputmethod.EditorInfo
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.sourabh.coronavirustracker.R
 import com.sourabh.coronavirustracker.databinding.FragmentIndiaBinding
 import com.sourabh.coronavirustracker.network.Resource
 import com.sourabh.coronavirustracker.network.RetrofitBuilder
 import com.sourabh.coronavirustracker.repository.MainRepository
+import com.sourabh.coronavirustracker.ui.india.adapters.IndianStatesAdapter
 
 class IndiaFragment : Fragment() {
 
@@ -29,6 +31,7 @@ class IndiaFragment : Fragment() {
     ): View? {
 
         _binding = FragmentIndiaBinding.inflate(inflater)
+        setHasOptionsMenu(true)
 
         val indianDataService = RetrofitBuilder.indianDataService
         val mainRepository = MainRepository(indianDataService)
@@ -48,11 +51,12 @@ class IndiaFragment : Fragment() {
          * onClick() in the xml passes the statewise data to the OnItemClickListener class
          * statewise data is passed into the viewModel every time the list item is clicked
          */
-        adapter = IndianStatesAdapter(
-            IndianStatesAdapter.OnItemClickListener { statewise ->
-                viewModel.listItemClicked(statewise)
-            }
-        )
+        adapter =
+            IndianStatesAdapter(
+                IndianStatesAdapter.OnItemClickListener { statewise ->
+                    viewModel.listItemClicked(statewise)
+                }
+            )
 
         /**
          *  To handle recyclerview position when orientation changes
@@ -78,7 +82,8 @@ class IndiaFragment : Fragment() {
                     is Resource.LOADING -> Log.i("IndiaFragment", "Loading")
                     is Resource.SUCCESS -> {
                         adapter.submitList(it.data)
-                        Log.i("IndiaFragment", "Success ${it.data[0].stateOrUT}")
+                        adapter.stateWiseDetailsList = it.data as MutableList
+                        Log.i("IndiaFragment", "Success ${it.data}")
                     }
                     is Resource.FAILURE -> {
                         Log.i("IndiaFragment", "Indian Data FAILED ${it.e}")
@@ -99,6 +104,29 @@ class IndiaFragment : Fragment() {
                 viewModel.navigationComplete()
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.bottom_bar_menu, menu)
+
+        val searchView = menu.findItem(R.id.search).actionView as SearchView
+        searchView.apply {
+            imeOptions = EditorInfo.IME_ACTION_DONE
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    adapter.filter.filter(query)
+                    onActionViewCollapsed()
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    adapter.filter.filter(newText)
+                    return false
+                }
+            })
+        }
+
     }
 
     override fun onDestroyView() {

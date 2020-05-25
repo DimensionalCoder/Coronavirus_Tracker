@@ -2,6 +2,8 @@ package com.sourabh.coronavirustracker.ui.india
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
@@ -14,7 +16,7 @@ abstract class BaseRecyclerAdapter<T>(
     diffCallback: DiffUtil.ItemCallback<T>,
     private val onCLickListener: IndianStatesAdapter.OnItemClickListener
 ) :
-    ListAdapter<T, BaseRecyclerAdapter.DataBindingViewHolder<T>>(diffCallback) {
+    ListAdapter<T, BaseRecyclerAdapter.DataBindingViewHolder<T>>(diffCallback), Filterable {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<T> {
         return DataBindingViewHolder.from(parent, viewType)
@@ -52,4 +54,6 @@ abstract class BaseRecyclerAdapter<T>(
             }
         }
     }
+
+    abstract override fun getFilter(): Filter
 }
