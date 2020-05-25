@@ -1,4 +1,4 @@
-package com.sourabh.coronavirustracker.ui.india
+package com.sourabh.coronavirustracker.ui.india.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,21 +9,27 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
 import com.sourabh.coronavirustracker.BR
-import com.sourabh.coronavirustracker.ui.india.indiatracker.IndianStatesAdapter
+import com.sourabh.coronavirustracker.R
+import com.sourabh.coronavirustracker.model.StatewiseDetails
 
 abstract class BaseRecyclerAdapter<T>(
     diffCallback: DiffUtil.ItemCallback<T>,
     private val onCLickListener: IndianStatesAdapter.OnItemClickListener
 ) :
-    ListAdapter<T, BaseRecyclerAdapter.DataBindingViewHolder<T>>(diffCallback), Filterable {
+    ListAdapter<T, BaseRecyclerAdapter.DataBindingViewHolder<T>>(diffCallback), Filterable,
+    RecyclerViewFastScroller.OnPopupTextUpdate {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<T> {
-        return DataBindingViewHolder.from(parent, viewType)
+        return DataBindingViewHolder.from(
+            parent,
+            viewType
+        )
     }
 
     override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int) {
-        holder.bind(getItem(position), position, onCLickListener)
+        holder.bind(getItem(position), onCLickListener)
     }
 
     class DataBindingViewHolder<T>(private val binding: ViewDataBinding) :
@@ -31,11 +37,10 @@ abstract class BaseRecyclerAdapter<T>(
 
         fun bind(
             item: T,
-            position: Int,
             onCLickListener: IndianStatesAdapter.OnItemClickListener?
         ) {
             binding.setVariable(BR.data, item)
-            if (position != 0) {
+            if (itemViewType == R.layout.indian_list_item) {
                 binding.setVariable(BR.clickListener, onCLickListener)
             }
             binding.executePendingBindings()
@@ -50,10 +55,22 @@ abstract class BaseRecyclerAdapter<T>(
                     parent,
                     false
                 )
-                return DataBindingViewHolder(binding)
+                return DataBindingViewHolder(
+                    binding
+                )
             }
         }
     }
 
     abstract override fun getFilter(): Filter
+
+    override fun onChange(position: Int): CharSequence {
+        val data = getItem(position)
+        return when (data) {
+            is StatewiseDetails -> data.stateOrUT
+            else -> ""
+        }
+    }
+
+
 }
