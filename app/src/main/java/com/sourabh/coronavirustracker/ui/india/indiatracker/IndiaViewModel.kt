@@ -77,19 +77,6 @@ class IndiaViewModel(private val repo: MainRepository) : ViewModel() {
 
                 _navigateToDetailsFragment.postValue(state to districtOfState.districtData)
             }
-
-//            listOfStateAndDistricts?.let {
-//                for (districtsOfState in listOfStateAndDistricts) {
-//
-//                    /**
-//                     * Using Pair to return both the values
-//                     */
-//                    if (districtsOfState.state == state.stateOrUT) {
-//                        _navigateToDetailsFragment.postValue(state to districtsOfState.districtData)
-//                    }
-//                }
-//
-//            }
         }
     }
 
@@ -97,30 +84,3 @@ class IndiaViewModel(private val repo: MainRepository) : ViewModel() {
         _navigateToDetailsFragment.value = null
     }
 }
-
-
-//    private fun getStateData() {
-//        _indianStatewiseDetails.value = Resource.LOADING
-//        viewModelScope.launch(Dispatchers.IO) {
-//            try {
-//                val data = repo.getIndianStateData()
-//
-//                data.filter { it.totalConfirmed != 0 }
-//
-//                _indianStatewiseDetails.postValue(Resource.SUCCESS(data))
-//            } catch (e: Exception) {
-//                _indianStatewiseDetails.postValue(Resource.FAILURE(e))
-//            }
-//        }
-//    }
-//
-//    private fun getDistrictData() {
-//        viewModelScope.launch {
-//            try {
-//                val data = repo.getDistrictData()
-//                _indianDistrictData.postValue(data)
-//            } catch (e: java.lang.Exception) {
-//                _indianDistrictData.postValue(ArrayList())
-//            }
-//        }
-//    }

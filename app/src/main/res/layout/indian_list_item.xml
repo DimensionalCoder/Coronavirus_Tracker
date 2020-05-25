@@ -11,7 +11,7 @@
 
         <variable
             name="clickListener"
-            type="com.sourabh.coronavirustracker.ui.india.indiatracker.IndianStatesAdapter.OnItemClickListener" />
+            type="com.sourabh.coronavirustracker.ui.india.adapters.IndianStatesAdapter.OnItemClickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

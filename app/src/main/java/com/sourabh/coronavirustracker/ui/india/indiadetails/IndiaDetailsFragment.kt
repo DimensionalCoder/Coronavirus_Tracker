@@ -13,7 +13,6 @@ import com.sourabh.coronavirustracker.databinding.FragmentIndiaDetailsBinding
  */
 class IndiaDetailsFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
