@@ -1,11 +1,13 @@
 package com.sourabh.coronavirustracker.ui.india.adapters
 
 import android.content.res.Configuration
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
@@ -52,20 +54,16 @@ abstract class BaseRecyclerAdapter<T>(
                 R.layout.indian_total_list_item -> {
                     binding as IndianTotalListItemBinding
                     if (densityDpi > 420 && orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        Log.i("BaseRecyclerView", "$densityDpi")
                         setIndiaBindingTVSize(binding)
                     }
                 }
                 R.layout.indian_list_item -> {
                     binding as IndianListItemBinding
                     binding.clickListener = onCLickListener
-                    val newData = binding.newData
-                    item as StatewiseDetails
-
-                    // To hide "new" indicator in the list item
-                    if (item.deltaConfirmed != 0 || item.deltaRecovered != 0 || item.deltaDeaths != 0) {
-                        newData.visibility = View.VISIBLE
-                    } else {
-                        newData.visibility = View.GONE
+                    hideNewIndicator(binding.newData, item as StatewiseDetails)
+                    if (densityDpi > 500 && orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        setIndiaListItemTextSize(binding)
                     }
                 }
             }
@@ -73,11 +71,33 @@ abstract class BaseRecyclerAdapter<T>(
             binding.executePendingBindings()
         }
 
+        /**
+         * To set the textSize when display density changes
+         * AutoSizeText is a bad solution since the textView sizes don't change equally
+         */
         private fun setIndiaBindingTVSize(binding: IndianTotalListItemBinding) {
             val size = 24f
             binding.acitveCasesTv.textSize = size
             binding.recoveredTv.textSize = size
             binding.deathsTv.textSize = size
+        }
+
+        private fun setIndiaListItemTextSize(binding: IndianListItemBinding) {
+            val size = 12f
+            binding.conf.textSize = size
+            binding.rec.textSize = size
+            binding.dea.textSize = size
+        }
+
+        /**
+         * To hide "new" indicator in the list item when no new data is available
+         */
+        private fun hideNewIndicator(newTV: TextView, item: StatewiseDetails) {
+            if (item.deltaConfirmed != 0 || item.deltaRecovered != 0 || item.deltaDeaths != 0) {
+                newTV.visibility = View.VISIBLE
+            } else {
+                newTV.visibility = View.GONE
+            }
         }
 
         companion object {
@@ -96,8 +116,14 @@ abstract class BaseRecyclerAdapter<T>(
         }
     }
 
+    /**
+     * Filter for searchView
+     */
     abstract override fun getFilter(): Filter
 
+    /**
+     * To display the name on FastRecyclerView Scroller
+     */
     override fun onChange(position: Int): CharSequence {
         val data = getItem(position)
         return when (data) {
