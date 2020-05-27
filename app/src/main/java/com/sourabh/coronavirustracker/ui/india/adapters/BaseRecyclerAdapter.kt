@@ -2,6 +2,7 @@ package com.sourabh.coronavirustracker.ui.india.adapters
 
 import android.content.res.Configuration
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
 import com.sourabh.coronavirustracker.BR
 import com.sourabh.coronavirustracker.R
+import com.sourabh.coronavirustracker.databinding.IndianListItemBinding
 import com.sourabh.coronavirustracker.databinding.IndianTotalListItemBinding
 import com.sourabh.coronavirustracker.model.StatewiseDetails
 
@@ -54,7 +56,17 @@ abstract class BaseRecyclerAdapter<T>(
                     }
                 }
                 R.layout.indian_list_item -> {
-                    binding.setVariable(BR.clickListener, onCLickListener)
+                    binding as IndianListItemBinding
+                    binding.clickListener = onCLickListener
+                    val newData = binding.newData
+                    item as StatewiseDetails
+
+                    // To hide "new" indicator in the list item
+                    if (item.deltaConfirmed != 0 || item.deltaRecovered != 0 || item.deltaDeaths != 0) {
+                        newData.visibility = View.VISIBLE
+                    } else {
+                        newData.visibility = View.GONE
+                    }
                 }
             }
 
