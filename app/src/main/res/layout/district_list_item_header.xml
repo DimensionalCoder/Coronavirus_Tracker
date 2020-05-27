@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:id="@+id/district_tv"
+                style="@style/table_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1.5"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="@string/district"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:id="@+id/confirmed_tv"
+                style="@style/table_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="@string/confirmed_abbrev"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:id="@+id/active_tv"
+                style="@style/table_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="@string/active"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:id="@+id/recovered_tv"
+                style="@style/table_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="@string/recovered_abbrev"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:id="@+id/deceased_tv"
+                style="@style/table_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="@string/deceased_abbrev"
+                android:textAlignment="viewStart" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:paddingTop="2dp" />
+    </LinearLayout>
+</layout>

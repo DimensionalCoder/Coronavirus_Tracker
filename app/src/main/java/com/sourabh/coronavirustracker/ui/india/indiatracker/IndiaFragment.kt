@@ -18,22 +18,10 @@ import com.sourabh.coronavirustracker.repository.MainRepository
 import com.sourabh.coronavirustracker.ui.india.adapters.IndianStatesAdapter
 
 class IndiaFragment : Fragment() {
-//
-//    companion object {
-//        fun newInstance() = IndiaFragment()
-//    }
-
     private var _binding: FragmentIndiaBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: IndianStatesAdapter
-
-    private var searchShow: Boolean = false
-
-    fun openSearchBar() {
-        searchShow = searchShow == false
-        Log.i("IndiaFragment", "$searchShow")
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

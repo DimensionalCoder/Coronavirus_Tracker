@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="districtData"
+            type="com.sourabh.coronavirustracker.model.Districts" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:id="@+id/district"
+            style="@style/table_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1.5"
+            android:text="@{districtData.district}"
+            android:textAlignment="viewStart"
+            tools:text="Andaman and Nicobar Islands" />
+
+        <LinearLayout
+            android:id="@+id/confirmed_box"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/confirmed"
+                style="@style/table_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="@{String.valueOf(districtData.confirmed)}"
+                android:textAlignment="viewStart"
+                tools:text="@string/_1827126" />
+
+            <TextView
+                android:id="@+id/confirmedIncrease"
+                style="@style/table_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_arrow_up_orange"
+                android:includeFontPadding="false"
+                android:text="@{String.valueOf(districtData.delta.confirmed)}"
+                android:textAlignment="viewStart"
+                android:textColor="@color/orange"
+                tools:text="123" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/active"
+            style="@style/table_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="@{String.valueOf(districtData.active)}"
+            android:textAlignment="viewStart"
+            tools:text="2424" />
+
+        <LinearLayout
+            android:id="@+id/recovered_box"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/recovered"
+                style="@style/table_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(districtData.recovered)}"
+                android:textAlignment="viewStart"
+                tools:text="214" />
+
+            <TextView
+                android:id="@+id/recovered_increase"
+                style="@style/table_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_arrow_up_blue"
+                android:includeFontPadding="false"
+                android:text="@{String.valueOf(districtData.delta.recovered)}"
+                android:textAlignment="viewStart"
+                android:textColor="@color/blue"
+                tools:text="123" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/death_box"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/deceased"
+                style="@style/table_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(districtData.deceased)}"
+                android:textAlignment="viewStart"
+                tools:text="6743" />
+
+            <TextView
+                android:id="@+id/deceased_increase"
+                style="@style/table_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_arrow_up_red"
+                android:includeFontPadding="false"
+                android:text="@{String.valueOf(districtData.delta.deceased)}"
+                android:textAlignment="viewStart"
+                android:textColor="@color/red"
+                tools:text="123" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

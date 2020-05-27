@@ -41,10 +41,8 @@ abstract class BaseRecyclerAdapter<T>(
     class DataBindingViewHolder<T>(private val binding: ViewDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(
-            item: T,
-            onCLickListener: IndianStatesAdapter.OnItemClickListener?
-        ) {
+        fun bind(item: T, onCLickListener: IndianStatesAdapter.OnItemClickListener) {
+
             binding.setVariable(BR.data, item)
             val config = binding.root.resources.configuration
             val densityDpi = config.densityDpi
