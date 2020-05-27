@@ -18,11 +18,22 @@ import com.sourabh.coronavirustracker.repository.MainRepository
 import com.sourabh.coronavirustracker.ui.india.adapters.IndianStatesAdapter
 
 class IndiaFragment : Fragment() {
+//
+//    companion object {
+//        fun newInstance() = IndiaFragment()
+//    }
 
     private var _binding: FragmentIndiaBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: IndianStatesAdapter
+
+    private var searchShow: Boolean = false
+
+    fun openSearchBar() {
+        searchShow = searchShow == false
+        Log.i("IndiaFragment", "$searchShow")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,7 +94,7 @@ class IndiaFragment : Fragment() {
                     is Resource.SUCCESS -> {
                         adapter.submitList(it.data)
                         adapter.stateWiseDetailsList = it.data as MutableList
-                        Log.i("IndiaFragment", "Success ${it.data}")
+                        Log.i("IndiaFragment", "Success")
                     }
                     is Resource.FAILURE -> {
                         Log.i("IndiaFragment", "Indian Data FAILED ${it.e}")
@@ -111,23 +122,25 @@ class IndiaFragment : Fragment() {
         inflater.inflate(R.menu.bottom_bar_menu, menu)
 
         val searchView = menu.findItem(R.id.search).actionView as SearchView
+
         searchView.apply {
             imeOptions = EditorInfo.IME_ACTION_DONE
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     adapter.filter.filter(query)
                     onActionViewCollapsed()
-                    return false
+                    return true
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
                     adapter.filter.filter(newText)
-                    return false
+                    return true
                 }
             })
         }
 
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -1,5 +1,6 @@
 package com.sourabh.coronavirustracker.ui.india.adapters
 
+import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
 import com.sourabh.coronavirustracker.BR
 import com.sourabh.coronavirustracker.R
+import com.sourabh.coronavirustracker.databinding.IndianTotalListItemBinding
 import com.sourabh.coronavirustracker.model.StatewiseDetails
 
 abstract class BaseRecyclerAdapter<T>(
@@ -40,10 +42,30 @@ abstract class BaseRecyclerAdapter<T>(
             onCLickListener: IndianStatesAdapter.OnItemClickListener?
         ) {
             binding.setVariable(BR.data, item)
-            if (itemViewType == R.layout.indian_list_item) {
-                binding.setVariable(BR.clickListener, onCLickListener)
+            val config = binding.root.resources.configuration
+            val densityDpi = config.densityDpi
+            val orientation = config.orientation
+
+            when (itemViewType) {
+                R.layout.indian_total_list_item -> {
+                    binding as IndianTotalListItemBinding
+                    if (densityDpi > 420 && orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        setIndiaBindingTVSize(binding)
+                    }
+                }
+                R.layout.indian_list_item -> {
+                    binding.setVariable(BR.clickListener, onCLickListener)
+                }
             }
+
             binding.executePendingBindings()
+        }
+
+        private fun setIndiaBindingTVSize(binding: IndianTotalListItemBinding) {
+            val size = 24f
+            binding.acitveCasesTv.textSize = size
+            binding.recoveredTv.textSize = size
+            binding.deathsTv.textSize = size
         }
 
         companion object {

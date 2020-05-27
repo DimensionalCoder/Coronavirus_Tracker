@@ -38,7 +38,7 @@ class IndiaViewModel(private val repo: MainRepository) : ViewModel() {
     private suspend fun getIndianData(): Pair<Resource<List<StatewiseDetails>>, List<DistrictwiseDetails>> {
         return try {
             Log.i("IndiaViewModel", "Recalled")
-            val states = getStateData()
+            val states = getStateData().filter { it.totalConfirmed != 0 }
             val stateAndDistricts = getDistrictData()
             Resource.SUCCESS(states) to stateAndDistricts
         } catch (e: Exception) {

@@ -10,7 +10,9 @@ import com.sourabh.coronavirustracker.model.StatewiseDetails
 import java.util.*
 
 
-class IndianStatesAdapter(onCLickListener: OnItemClickListener) :
+class IndianStatesAdapter(
+    onCLickListener: OnItemClickListener
+) :
     BaseRecyclerAdapter<StatewiseDetails>(DiffCallBack, onCLickListener) {
 
     // Pass the list from the fragment
@@ -40,13 +42,16 @@ class IndianStatesAdapter(onCLickListener: OnItemClickListener) :
      * Set the layouts here
      */
     override fun getItemViewType(position: Int): Int {
-        return if (position == 0 && getItem(position).stateOrUT == "Total") {
+        return if (getItem(position).stateOrUT == "Total") {
             R.layout.indian_total_list_item
         } else {
             R.layout.indian_list_item
         }
     }
 
+    /**
+     * Click Listener
+     */
     class OnItemClickListener(private val clickListener: (statewise: StatewiseDetails) -> Unit) {
         fun onClick(statewise: StatewiseDetails) {
             Log.i("RVClickListener", "Item clicked: ${statewise.stateOrUT}")
