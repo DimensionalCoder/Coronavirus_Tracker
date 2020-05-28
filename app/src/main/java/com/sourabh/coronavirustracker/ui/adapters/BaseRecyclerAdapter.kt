@@ -1,4 +1,4 @@
-package com.sourabh.coronavirustracker.ui.india.adapters
+package com.sourabh.coronavirustracker.ui.adapters
 
 import android.content.res.Configuration
 import android.util.Log

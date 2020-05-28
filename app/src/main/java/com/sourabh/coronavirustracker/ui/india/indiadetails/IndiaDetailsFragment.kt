@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.sourabh.coronavirustracker.databinding.FragmentIndiaDetailsBinding
-import com.sourabh.coronavirustracker.ui.india.adapters.DistrictListAdapter
+import com.sourabh.coronavirustracker.ui.adapters.DistrictListAdapter
 
 class IndiaDetailsFragment : Fragment() {
 
@@ -27,7 +27,8 @@ class IndiaDetailsFragment : Fragment() {
             ViewModelProvider(this, viewModelFactory).get(IndianDetailsViewModel::class.java)
 
         val recyclerView = binding.districtList
-        val adapter = DistrictListAdapter()
+        val adapter =
+            DistrictListAdapter()
         viewModel.listOfData.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)

@@ -1,6 +1,6 @@
 @file:Suppress("SpellCheckingInspection")
 
-package com.sourabh.coronavirustracker.ui.india.adapters
+package com.sourabh.coronavirustracker.ui.adapters
 
 import android.util.Log
 import android.widget.Filter
@@ -13,7 +13,8 @@ import java.util.*
 class IndianStatesAdapter(
     onCLickListener: OnItemClickListener
 ) :
-    BaseRecyclerAdapter<StatewiseDetails>(DiffCallBack, onCLickListener) {
+    BaseRecyclerAdapter<StatewiseDetails>(
+        DiffCallBack, onCLickListener) {
 
     // Pass the list from the fragment
     var stateWiseDetailsList: MutableList<StatewiseDetails> = mutableListOf()

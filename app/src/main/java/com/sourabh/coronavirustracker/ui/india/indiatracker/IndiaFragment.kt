@@ -15,7 +15,7 @@ import com.sourabh.coronavirustracker.databinding.FragmentIndiaBinding
 import com.sourabh.coronavirustracker.network.Resource
 import com.sourabh.coronavirustracker.network.RetrofitBuilder
 import com.sourabh.coronavirustracker.repository.MainRepository
-import com.sourabh.coronavirustracker.ui.india.adapters.IndianStatesAdapter
+import com.sourabh.coronavirustracker.ui.adapters.IndianStatesAdapter
 
 class IndiaFragment : Fragment() {
     private var _binding: FragmentIndiaBinding? = null

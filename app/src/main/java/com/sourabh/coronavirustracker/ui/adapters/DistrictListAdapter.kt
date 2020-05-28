@@ -1,4 +1,4 @@
-package com.sourabh.coronavirustracker.ui.india.adapters
+package com.sourabh.coronavirustracker.ui.adapters
 
 import android.content.res.Configuration
 import android.view.LayoutInflater
@@ -31,9 +31,13 @@ class DistrictListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == HEADER) {
-            HeaderViewHolder.from(parent)
+            HeaderViewHolder.from(
+                parent
+            )
         } else {
-            ListItemViewHolder.from(parent)
+            ListItemViewHolder.from(
+                parent
+            )
         }
     }
 
@@ -70,7 +74,9 @@ class DistrictListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             fun from(parent: ViewGroup): HeaderViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = DistrictHeaderBinding.inflate(layoutInflater, parent, false)
-                return HeaderViewHolder(binding)
+                return HeaderViewHolder(
+                    binding
+                )
             }
         }
     }
@@ -138,7 +144,9 @@ class DistrictListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             fun from(parent: ViewGroup): ListItemViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = DistrictListItemBinding.inflate(layoutInflater, parent, false)
-                return ListItemViewHolder(binding)
+                return ListItemViewHolder(
+                    binding
+                )
             }
         }
 
