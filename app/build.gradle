@@ -95,6 +95,9 @@ dependencies {
     implementation "com.squareup.moshi:moshi:$moshi_ver"
     implementation("com.squareup.moshi:moshi-kotlin:$moshi_ver")
 
+    // Jsoup
+    implementation 'org.jsoup:jsoup:1.13.1'
+
     // LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 }
