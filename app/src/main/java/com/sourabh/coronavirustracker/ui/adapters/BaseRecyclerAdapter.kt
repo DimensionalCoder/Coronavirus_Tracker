@@ -14,15 +14,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
-import com.sourabh.coronavirustracker.BR
 import com.sourabh.coronavirustracker.R
+import com.sourabh.coronavirustracker.databinding.IndiaListItemBinding
 import com.sourabh.coronavirustracker.databinding.IndianTotalListItemBinding
-import com.sourabh.coronavirustracker.databinding.MainListItemBinding
+import com.sourabh.coronavirustracker.databinding.WorldListItemBinding
+import com.sourabh.coronavirustracker.databinding.WorldTotalListItemBinding
 import com.sourabh.coronavirustracker.model.StatewiseDetails
+import com.sourabh.coronavirustracker.model.WorldDataModel
 
 abstract class BaseRecyclerAdapter<T>(
     diffCallback: DiffUtil.ItemCallback<T>,
-    private val onCLickListener: IndianStatesAdapter.OnItemClickListener
+    private val onCLickListener: IndianStatesAdapter.OnItemClickListener? = null
 ) :
     ListAdapter<T, BaseRecyclerAdapter.DataBindingViewHolder<T>>(diffCallback), Filterable,
     RecyclerViewFastScroller.OnPopupTextUpdate {
@@ -35,15 +37,18 @@ abstract class BaseRecyclerAdapter<T>(
     }
 
     override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int) {
-        holder.bind(getItem(position), onCLickListener)
+        if (onCLickListener != null) {
+            holder.bind(getItem(position), onCLickListener)
+        } else {
+            holder.bind(getItem(position))
+        }
     }
 
     class DataBindingViewHolder<T>(private val binding: ViewDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: T, onCLickListener: IndianStatesAdapter.OnItemClickListener) {
+        fun bind(item: T, onCLickListener: IndianStatesAdapter.OnItemClickListener? = null) {
 
-            binding.setVariable(BR.data, item)
             val config = binding.root.resources.configuration
             val densityDpi = config.densityDpi
             val orientation = config.orientation
@@ -51,18 +56,31 @@ abstract class BaseRecyclerAdapter<T>(
             when (itemViewType) {
                 R.layout.indian_total_list_item -> {
                     binding as IndianTotalListItemBinding
-                    if (densityDpi > 420 && orientation == Configuration.ORIENTATION_PORTRAIT) {
-                        Log.i("BaseRecyclerView", "$densityDpi")
-                        setIndiaBindingTVSize(binding)
-                    }
+                    binding.data = item as StatewiseDetails
+                    Log.i("BaseRecyclerView", "$densityDpi")
+                    setIndiaBindingTVSize(binding, densityDpi, orientation)
+
                 }
-                R.layout.main_list_item -> {
-                    binding as MainListItemBinding
-                    binding.clickListener = onCLickListener
+                R.layout.india_list_item -> {
+                    binding as IndiaListItemBinding
+                    binding.data = item as StatewiseDetails
+                    onCLickListener?.let { binding.clickListener = onCLickListener }
                     hideNewIndicator(binding.newData, item as StatewiseDetails)
-                    if (densityDpi > 500 && orientation == Configuration.ORIENTATION_PORTRAIT) {
-                        setIndiaListItemTextSize(binding)
-                    }
+                    setMainListItemTextSize(
+                        binding.conf, binding.dea, binding.rec, densityDpi, orientation
+                    )
+                }
+                R.layout.world_total_list_item -> {
+                    binding as WorldTotalListItemBinding
+                    binding.data = item as WorldDataModel
+                    setWorldBindingTVSize(binding, densityDpi, orientation)
+                }
+                R.layout.world_list_item -> {
+                    binding as WorldListItemBinding
+                    binding.data = item as WorldDataModel
+                    setMainListItemTextSize(
+                        binding.conf, binding.dea, binding.rec, densityDpi, orientation
+                    )
                 }
             }
 
@@ -73,18 +91,43 @@ abstract class BaseRecyclerAdapter<T>(
          * To set the textSize when display density changes
          * AutoSizeText is a bad solution since the textView sizes don't change equally
          */
-        private fun setIndiaBindingTVSize(binding: IndianTotalListItemBinding) {
-            val size = 24f
+        private fun setIndiaBindingTVSize(
+            binding: IndianTotalListItemBinding, densityDpi: Int, orientation: Int
+        ) {
+            if (densityDpi in 421..460 && orientation == Configuration.ORIENTATION_PORTRAIT) {
+                val size = 28f
+                tvSize(binding, size)
+            } else if (densityDpi > 460 && orientation == Configuration.ORIENTATION_PORTRAIT) {
+                val size = 24f
+                tvSize(binding, size)
+            }
+        }
+
+        private fun tvSize(binding: IndianTotalListItemBinding, size: Float) {
             binding.acitveCasesTv.textSize = size
             binding.recoveredTv.textSize = size
             binding.deathsTv.textSize = size
         }
 
-        private fun setIndiaListItemTextSize(binding: MainListItemBinding) {
-            val size = 12f
-            binding.conf.textSize = size
-            binding.rec.textSize = size
-            binding.dea.textSize = size
+        private fun setWorldBindingTVSize(
+            binding: WorldTotalListItemBinding, densityDpi: Int, orientation: Int
+        ) {
+            if (densityDpi > 460 && orientation == Configuration.ORIENTATION_PORTRAIT) {
+                val size = 24f
+                binding.recoveredTv.textSize = size
+                binding.deathsTv.textSize = size
+            }
+        }
+
+        private fun setMainListItemTextSize(
+            conf: TextView, dea: TextView, rec: TextView, densityDpi: Int, orientation: Int
+        ) {
+            if (densityDpi > 500 && orientation == Configuration.ORIENTATION_PORTRAIT) {
+                val size = 12f
+                conf.textSize = size
+                dea.textSize = size
+                rec.textSize = size
+            }
         }
 
         /**
@@ -123,9 +166,9 @@ abstract class BaseRecyclerAdapter<T>(
      * To display the name on FastRecyclerView Scroller
      */
     override fun onChange(position: Int): CharSequence {
-        val data = getItem(position)
-        return when (data) {
+        return when (val data = getItem(position)) {
             is StatewiseDetails -> data.stateOrUT
+            is WorldDataModel -> data.country
             else -> ""
         }
     }

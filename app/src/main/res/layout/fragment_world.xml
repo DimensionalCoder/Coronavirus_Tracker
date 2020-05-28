@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,7 +7,7 @@
     tools:context=".ui.world.WorldFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/indian_rv"
+        android:id="@+id/world_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
@@ -16,6 +16,6 @@
         android:paddingTop="16dp"
         android:paddingBottom="56dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/main_list_item" />
+        tools:listitem="@layout/world_list_item" />
 
-</FrameLayout>
+</com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller>

@@ -17,6 +17,6 @@
         android:paddingTop="16dp"
         android:paddingBottom="56dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/main_list_item" />
+        tools:listitem="@layout/india_list_item" />
 
 </com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller>

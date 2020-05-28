@@ -47,7 +47,7 @@ class IndianStatesAdapter(
         return if (getItem(position).stateOrUT == "Total") {
             R.layout.indian_total_list_item
         } else {
-            R.layout.main_list_item
+            R.layout.india_list_item
         }
     }
 

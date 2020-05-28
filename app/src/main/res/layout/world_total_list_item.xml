@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.sourabh.coronavirustracker.model.WorldDataModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/detail_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_bg">
+
+            <TextView
+                android:id="@+id/india"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="@{data.country}"
+                android:textAppearance="@style/Details_Title"
+                android:textColor="@color/colorWhite"
+                android:textSize="36sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="World" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="#65FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/india" />
+
+            <TextView
+                android:id="@+id/tc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/total_cases"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <TextView
+                android:id="@+id/total_cases_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="@{String.valueOf(data.confirmed)}"
+                android:textAppearance="@style/Details_Title"
+                android:textColor="@color/colorWhite"
+                android:textSize="56sp"
+                app:layout_constraintStart_toStartOf="@+id/tc"
+                app:layout_constraintTop_toBottomOf="@+id/tc"
+                tools:text="@string/_30000" />
+
+            <LinearLayout
+                android:id="@+id/rBOX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dBOX"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/total_cases_tv">
+
+                <TextView
+                    android:id="@+id/rec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text="@string/recovered"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/recovered_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@{String.valueOf(data.recovered)}"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Details_Title"
+                    android:textColor="@color/colorWhite"
+                    tools:text="1213" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/dBOX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/rBOX"
+                app:layout_constraintStart_toEndOf="@+id/rBOX"
+                app:layout_constraintTop_toBottomOf="@+id/total_cases_tv"
+                app:layout_constraintTop_toTopOf="@+id/rBOX">
+
+                <TextView
+                    android:id="@+id/death"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text="@string/deaths"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/deaths_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@{String.valueOf(data.deaths)}"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Details_Title"
+                    android:textColor="@color/colorWhite"
+                    tools:text="223" />
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
