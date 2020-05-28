@@ -12,6 +12,10 @@ import com.sourabh.coronavirustracker.model.Districts
 import com.sourabh.coronavirustracker.model.StatewiseDetails
 import kotlin.math.log10
 
+/**
+ * Passing in List<Any> which contains both Statewise data and Districts data, statewise data is used
+ * in the header.
+ */
 class DistrictListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val HEADER = 0
