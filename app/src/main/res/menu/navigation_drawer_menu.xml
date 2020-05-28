@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Some as that in navigation.xml-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/worldFragment"
+        android:title="@string/global" />
+    <item
+        android:id="@+id/indiaFragment"
+        android:title="@string/india" />
+</menu>

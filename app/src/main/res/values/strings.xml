@@ -7,6 +7,7 @@
     <string name="_1827126">1827126</string>
     <string name="_30000">30000</string>
 
+    <!-- from the api source-->
     <string name="recovered">Recovered</string>
     <string name="deaths">Deceased</string>
     <string name="confirmed">Confirmed</string>

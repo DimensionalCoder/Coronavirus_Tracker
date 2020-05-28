@@ -18,6 +18,16 @@ class MainActivity : AppCompatActivity() {
 
         val bottomAppBar = binding.bar
         setSupportActionBar(bottomAppBar)
+
+        /**
+         * Open Navigation Drawer
+         */
+        bottomAppBar.setNavigationOnClickListener {
+            val bottomNavDrawer = BottomNavigationDrawer.getInstance()
+
+            bottomNavDrawer.show(supportFragmentManager, bottomNavDrawer.tag)
+
+        }
     }
 
     /**

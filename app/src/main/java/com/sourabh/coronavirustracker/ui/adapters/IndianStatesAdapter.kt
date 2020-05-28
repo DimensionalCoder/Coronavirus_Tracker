@@ -14,7 +14,8 @@ class IndianStatesAdapter(
     onCLickListener: OnItemClickListener
 ) :
     BaseRecyclerAdapter<StatewiseDetails>(
-        DiffCallBack, onCLickListener) {
+        DiffCallBack, onCLickListener
+    ) {
 
     // Pass the list from the fragment
     var stateWiseDetailsList: MutableList<StatewiseDetails> = mutableListOf()
