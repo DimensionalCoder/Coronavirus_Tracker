@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             newOverride.fontScale = 1.0f
             applyOverrideConfiguration(newOverride)
             super.attachBaseContext(newBase)
-        }else {
+        } else {
             super.attachBaseContext(newBase)
         }
     }

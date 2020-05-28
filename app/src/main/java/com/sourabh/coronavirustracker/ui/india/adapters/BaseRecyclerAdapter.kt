@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
 import com.sourabh.coronavirustracker.BR
 import com.sourabh.coronavirustracker.R
-import com.sourabh.coronavirustracker.databinding.IndianListItemBinding
 import com.sourabh.coronavirustracker.databinding.IndianTotalListItemBinding
+import com.sourabh.coronavirustracker.databinding.MainListItemBinding
 import com.sourabh.coronavirustracker.model.StatewiseDetails
 
 abstract class BaseRecyclerAdapter<T>(
@@ -56,8 +56,8 @@ abstract class BaseRecyclerAdapter<T>(
                         setIndiaBindingTVSize(binding)
                     }
                 }
-                R.layout.indian_list_item -> {
-                    binding as IndianListItemBinding
+                R.layout.main_list_item -> {
+                    binding as MainListItemBinding
                     binding.clickListener = onCLickListener
                     hideNewIndicator(binding.newData, item as StatewiseDetails)
                     if (densityDpi > 500 && orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -80,7 +80,7 @@ abstract class BaseRecyclerAdapter<T>(
             binding.deathsTv.textSize = size
         }
 
-        private fun setIndiaListItemTextSize(binding: IndianListItemBinding) {
+        private fun setIndiaListItemTextSize(binding: MainListItemBinding) {
             val size = 12f
             binding.conf.textSize = size
             binding.rec.textSize = size

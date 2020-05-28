@@ -27,5 +27,10 @@
             android:name="districtData"
             app:argType="com.sourabh.coronavirustracker.model.Districts[]" />
     </fragment>
+    <fragment
+        android:id="@+id/worldFragment"
+        android:name="com.sourabh.coronavirustracker.ui.world.WorldFragment"
+        android:label="fragment_world"
+        tools:layout="@layout/fragment_world" />
 
 </navigation>
