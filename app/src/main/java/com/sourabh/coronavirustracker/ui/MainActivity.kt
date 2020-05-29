@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import com.sourabh.coronavirustracker.R
 import com.sourabh.coronavirustracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +30,17 @@ class MainActivity : AppCompatActivity() {
             bottomNavDrawer.show(supportFragmentManager, bottomNavDrawer.tag)
 
         }
+
+        val navController = findNavController(R.id.nav_host_fragment)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val title = binding.title
+            when (destination.id) {
+                R.id.indiaFragment -> title.text = resources.getText(R.string.india)
+                R.id.worldFragment -> title.text = resources.getText(R.string.global)
+                R.id.indiaDetailsFragment -> bottomAppBar.performShow()
+            }
+        }
+
     }
 
     /**
