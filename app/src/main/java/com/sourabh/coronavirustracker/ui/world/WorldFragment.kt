@@ -54,7 +54,10 @@ class WorldFragment : Fragment() {
             it?.let {
                 when (it) {
                     is Resource.LOADING -> Log.i("WorldFragment", "Loading")
-                    is Resource.SUCCESS -> adapter.submitList(it.data)
+                    is Resource.SUCCESS -> {
+                        adapter.submitList(it.data)
+                        adapter.setFilterList(it.data as MutableList)
+                    }
                     is Resource.FAILURE -> Log.i("WorldFragment", "Failure ${it.e}")
                 }
             }

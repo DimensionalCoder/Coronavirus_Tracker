@@ -81,7 +81,7 @@ class IndiaFragment : Fragment() {
                     is Resource.LOADING -> Log.i("IndiaFragment", "Loading")
                     is Resource.SUCCESS -> {
                         adapter.submitList(it.data)
-                        adapter.stateWiseDetailsList = it.data as MutableList
+                        adapter.setFilterList(it.data as MutableList)
                         Log.i("IndiaFragment", "Success")
                     }
                     is Resource.FAILURE -> {

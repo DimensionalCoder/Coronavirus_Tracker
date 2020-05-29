@@ -9,7 +9,10 @@ import java.util.*
 class CountriesAdapter : BaseRecyclerAdapter<WorldDataModel>(DiffItem) {
 
     // Pass the list from the fragment
-    val worldDataList: MutableList<WorldDataModel> = mutableListOf()
+    private lateinit var worldDataList: MutableList<WorldDataModel>
+    fun setFilterList(worldList: MutableList<WorldDataModel>) {
+        worldDataList = worldList
+    }
 
     // To show the filtered list
     private lateinit var worldFilteredList: MutableList<WorldDataModel>

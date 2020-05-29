@@ -136,8 +136,8 @@ class DistrictListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
         }
 
-        private fun getDigits(case: Int): Double {
-            return log10(case.toDouble()) + 1
+        private fun getDigits(case: Int): Int {
+            return (log10(case.toDouble()) + 1).toInt()
         }
 
         companion object {

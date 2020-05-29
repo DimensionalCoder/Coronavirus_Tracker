@@ -103,12 +103,6 @@ abstract class BaseRecyclerAdapter<T>(
             }
         }
 
-        private fun tvSize(binding: IndianTotalListItemBinding, size: Float) {
-            binding.acitveCasesTv.textSize = size
-            binding.recoveredTv.textSize = size
-            binding.deathsTv.textSize = size
-        }
-
         private fun setWorldBindingTVSize(
             binding: WorldTotalListItemBinding, densityDpi: Int, orientation: Int
         ) {
@@ -128,6 +122,12 @@ abstract class BaseRecyclerAdapter<T>(
                 dea.textSize = size
                 rec.textSize = size
             }
+        }
+
+        private fun tvSize(binding: IndianTotalListItemBinding, size: Float) {
+            binding.acitveCasesTv.textSize = size
+            binding.recoveredTv.textSize = size
+            binding.deathsTv.textSize = size
         }
 
         /**

@@ -18,7 +18,10 @@ class IndianStatesAdapter(
     ) {
 
     // Pass the list from the fragment
-    var stateWiseDetailsList: MutableList<StatewiseDetails> = mutableListOf()
+    private lateinit var stateWiseDetailsList: MutableList<StatewiseDetails>
+    fun setFilterList(statewiseList: MutableList<StatewiseDetails>) {
+        stateWiseDetailsList = statewiseList
+    }
 
     // Used to show the filtered list
     private lateinit var statewiseFilterList: MutableList<StatewiseDetails>
