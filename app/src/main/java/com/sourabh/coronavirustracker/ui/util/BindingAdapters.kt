@@ -1,6 +1,5 @@
 package com.sourabh.coronavirustracker.ui.util
 
-import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -9,15 +8,12 @@ import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-
 fun TextView.setUpdateTime(updateTime: String?) {
     updateTime?.let {
         val dateTime = updateTime.split(" ")
-        val time = dateTime[1]
-        val date = dateTime[0]
 
         text = LocalDateTime.parse(
-            "$time $date",
+            "$dateTime[1] $dateTime[0",
             DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy")
         ).format(DateTimeFormatter.ofPattern("hh:mm a, dd MMM yyyy"))
     }
