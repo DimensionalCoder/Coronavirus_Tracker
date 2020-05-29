@@ -8,6 +8,7 @@ import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+@BindingAdapter("updateTime")
 fun TextView.setUpdateTime(updateTime: String?) {
     updateTime?.let {
         val dateTime = updateTime.split(" ")
