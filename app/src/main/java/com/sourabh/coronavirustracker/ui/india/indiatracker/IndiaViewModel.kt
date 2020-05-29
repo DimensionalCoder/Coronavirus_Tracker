@@ -60,7 +60,6 @@ class IndiaViewModel(private val repo: MainRepository) : ViewModel() {
     private val _navigateToDetailsFragment =
         MutableLiveData<Pair<StatewiseDetails, List<Districts>>>()
 
-    //    private val detailsData = MutableLiveData<Pair<StatewiseDetails, DistrictwiseDetails>>()
     val navigateToIndianFragment: LiveData<Pair<StatewiseDetails, List<Districts>>>
         get() = _navigateToDetailsFragment
 
