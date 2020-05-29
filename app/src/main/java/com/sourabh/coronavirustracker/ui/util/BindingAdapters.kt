@@ -21,7 +21,7 @@ fun TextView.setUpdateTime(updateTime: String?) {
         val formattedTime = twelve.format(tf.parse(time)!!)
 
         val date = dateTime[0]
-        val format = SimpleDateFormat("dd/mm/yyyy")
+        val format = SimpleDateFormat("dd/MM/yyyy")
         val stringDate = SimpleDateFormat("dd MMM yyyy")
         val formattedDate = stringDate.format(format.parse((date))!!)
 
