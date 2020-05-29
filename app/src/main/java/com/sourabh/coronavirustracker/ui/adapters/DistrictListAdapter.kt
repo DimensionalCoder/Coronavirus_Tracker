@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import com.sourabh.coronavirustracker.R
 import com.sourabh.coronavirustracker.databinding.DistrictHeaderBinding
 import com.sourabh.coronavirustracker.databinding.DistrictListItemBinding
 import com.sourabh.coronavirustracker.model.Districts
 import com.sourabh.coronavirustracker.model.StatewiseDetails
+import com.sourabh.coronavirustracker.ui.util.setUpSnackbar
 import kotlin.math.log10
 
 /**
@@ -105,6 +109,21 @@ class DistrictListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             binding.deathBox.orientation =
                 getOrientation(item.deceased, item.delta.deceased, config)
+
+            /**
+             * Show district notes if available
+             */
+            if (!item.notes.isNullOrBlank()) {
+                val district = binding.district
+                district.setTextColor(ContextCompat.getColor(district.context, R.color.colorWhite))
+                binding.ll.setOnClickListener {
+                    Snackbar.make(binding.root, item.notes.toString(), Snackbar.LENGTH_LONG)
+                        .setUpSnackbar()
+                        .show()
+                }
+            }
+
+            binding.executePendingBindings()
         }
 
 

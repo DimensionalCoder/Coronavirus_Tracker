@@ -38,8 +38,8 @@ fun ImageView.setStateNotes(stateNotes: String?) {
         if (s.isNotBlank()) {
             this.setOnClickListener {
                 Snackbar.make(this, s, Snackbar.LENGTH_LONG)
+                    .setUpSnackbar()
                     .show()
-//                    .setupSnackBar()
             }
         } else {
             this.visibility = View.GONE
