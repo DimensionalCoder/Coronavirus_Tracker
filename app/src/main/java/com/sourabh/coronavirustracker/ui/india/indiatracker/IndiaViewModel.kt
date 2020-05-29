@@ -24,6 +24,10 @@ class IndiaViewModel(private val repo: MainRepository) : ViewModel() {
         initData()
     }
 
+    fun retry() {
+        initData()
+    }
+
     private fun initData() {
 
         _indianStatewiseDetails.value = Resource.LOADING

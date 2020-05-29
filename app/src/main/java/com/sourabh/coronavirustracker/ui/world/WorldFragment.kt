@@ -1,7 +1,6 @@
 package com.sourabh.coronavirustracker.ui.world
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
@@ -51,17 +50,42 @@ class WorldFragment : Fragment() {
     private fun viewModelObserver(viewModel: WorldViewModel) {
 
         viewModel.worldData.observe(viewLifecycleOwner, Observer {
+
+            val shimmerScreen = binding.shimmerLoading
+            val recyclerView = binding.worldRv
+            val retryScreen = binding.retry
             it?.let {
                 when (it) {
-                    is Resource.LOADING -> Log.i("WorldFragment", "Loading")
+                    is Resource.LOADING -> {
+                        shimmerScreen.visibility = View.VISIBLE
+                        shimmerScreen.startShimmer()
+                        recyclerView.visibility = View.GONE
+                        retryScreen.visibility = View.GONE
+                    }
                     is Resource.SUCCESS -> {
                         adapter.submitList(it.data)
                         adapter.setFilterList(it.data as MutableList)
+                        shimmerScreen.stopShimmer()
+                        shimmerScreen.visibility = View.GONE
+                        recyclerView.visibility = View.VISIBLE
                     }
-                    is Resource.FAILURE -> Log.i("WorldFragment", "Failure ${it.e}")
+                    is Resource.FAILURE -> {
+                        shimmerScreen.visibility = View.GONE
+                        recyclerView.visibility = View.GONE
+                        retryScreen.visibility = View.VISIBLE
+                        enableRetry(viewModel)
+                    }
                 }
             }
         })
+    }
+
+    private fun enableRetry(viewModel: WorldViewModel) {
+        val retryButton = binding.retryButton
+        retryButton.setOnClickListener {
+            viewModel.retry()
+            binding.shimmerLoading.visibility = View.VISIBLE
+        }
     }
 
     override fun onDestroyView() {

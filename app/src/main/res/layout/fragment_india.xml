@@ -19,4 +19,66 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/india_list_item" />
 
+    <!-- For loading screen -->
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_placeholder_item" />
+
+            <include layout="@layout/shimmer_placeholder_item" />
+
+            <include layout="@layout/shimmer_placeholder_item" />
+
+            <include layout="@layout/shimmer_placeholder_item" />
+
+            <include layout="@layout/shimmer_placeholder_item" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <!-- Retry screen -->
+    <!-- ViewBinding crashes if retry is included here from another layout-->
+    <LinearLayout
+        android:id="@+id/retry"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/Details_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="@string/connection_failed"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            style="@style/normal_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/could_not_connect_to_the_network_nplease_check_and_try_again" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/retry_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:text="@string/retry"
+            app:icon="@drawable/ic_refresh"
+            app:iconGravity="end" />
+    </LinearLayout>
+
 </com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller>

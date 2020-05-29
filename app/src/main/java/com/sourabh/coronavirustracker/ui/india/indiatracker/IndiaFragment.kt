@@ -1,7 +1,6 @@
 package com.sourabh.coronavirustracker.ui.india.indiatracker
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
@@ -77,16 +76,29 @@ class IndiaFragment : Fragment() {
 
         viewModel.indianStatewiseDetails.observe(viewLifecycleOwner, Observer {
             it?.let {
+                val shimmerScreen = binding.shimmerLoading
+                val retryScreen = binding.retry
+                val recyclerView = binding.indianRv
                 when (it) {
-                    is Resource.LOADING -> Log.i("IndiaFragment", "Loading")
+                    is Resource.LOADING -> {
+                        shimmerScreen.visibility = View.VISIBLE
+                        shimmerScreen.startShimmer()
+                        recyclerView.visibility = View.GONE
+                        retryScreen.visibility = View.GONE
+                    }
                     is Resource.SUCCESS -> {
                         adapter.submitList(it.data)
                         adapter.setFilterList(it.data as MutableList)
-                        Log.i("IndiaFragment", "Success")
+                        shimmerScreen.stopShimmer()
+                        shimmerScreen.visibility = View.GONE
+                        recyclerView.visibility = View.VISIBLE
                     }
                     is Resource.FAILURE -> {
-                        Log.i("IndiaFragment", "Indian Data FAILED ${it.e}")
                         adapter.submitList(ArrayList())
+                        shimmerScreen.visibility = View.GONE
+                        recyclerView.visibility = View.GONE
+                        retryScreen.visibility = View.VISIBLE
+                        enableRetry(viewModel)
                     }
                 }
             }
@@ -103,6 +115,13 @@ class IndiaFragment : Fragment() {
                 viewModel.navigationComplete()
             }
         })
+    }
+
+    private fun enableRetry(viewModel: IndiaViewModel) {
+        binding.retryButton.setOnClickListener {
+            viewModel.retry()
+            binding.shimmerLoading.visibility = View.VISIBLE
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

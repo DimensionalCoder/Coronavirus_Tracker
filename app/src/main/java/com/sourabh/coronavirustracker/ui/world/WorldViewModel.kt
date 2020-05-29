@@ -19,6 +19,9 @@ class WorldViewModel(private val mainRepository: MainRepository) : ViewModel() {
         getWorldData()
     }
 
+    fun retry() {
+        getWorldData()
+    }
 
     private fun getWorldData() {
         _worldData.value = Resource.LOADING

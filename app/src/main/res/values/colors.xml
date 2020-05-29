@@ -15,4 +15,6 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
 
+    <color name="shimmer_bg">#D2D2D2</color>
+
 </resources>
