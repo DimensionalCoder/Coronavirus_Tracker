@@ -9,8 +9,6 @@ import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-// Using SimpleDateFormat since Java 8 date time classes require min api 26
-@SuppressLint("SimpleDateFormat")
 @BindingAdapter("updateTime")
 fun TextView.setUpdateTime(updateTime: String?) {
     updateTime?.let {
