@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_india">
         <action
             android:id="@+id/action_indiaFragment_to_indiaDetailsFragment"
-            app:destination="@id/indiaDetailsFragment" />
+            app:destination="@id/indiaDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
