@@ -28,8 +28,6 @@ class WorldFragment : Fragment() {
     ): View? {
         _binding = FragmentWorldBinding.inflate(inflater)
 
-        setHasOptionsMenu(true)
-
         val worldDataService = WorldDataService
         val mainRepository = MainRepository(worldDataService = worldDataService)
         val viewModelFactory = WorldViewModelFactory(mainRepository)
@@ -57,6 +55,7 @@ class WorldFragment : Fragment() {
             it?.let {
                 when (it) {
                     is Resource.LOADING -> {
+                        setHasOptionsMenu(false)
                         shimmerScreen.visibility = View.VISIBLE
                         shimmerScreen.startShimmer()
                         recyclerView.visibility = View.GONE
@@ -68,8 +67,10 @@ class WorldFragment : Fragment() {
                         shimmerScreen.stopShimmer()
                         shimmerScreen.visibility = View.GONE
                         recyclerView.visibility = View.VISIBLE
+                        setHasOptionsMenu(true)
                     }
                     is Resource.FAILURE -> {
+                        setHasOptionsMenu(false)
                         shimmerScreen.visibility = View.GONE
                         recyclerView.visibility = View.GONE
                         retryScreen.visibility = View.VISIBLE

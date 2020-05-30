@@ -29,7 +29,6 @@ class IndiaFragment : Fragment() {
     ): View? {
 
         _binding = FragmentIndiaBinding.inflate(inflater)
-        setHasOptionsMenu(true)
 
         val indianDataService = RetrofitBuilder.indianDataService
         val mainRepository = MainRepository(indianDataService)
@@ -81,6 +80,7 @@ class IndiaFragment : Fragment() {
                 val recyclerView = binding.indianRv
                 when (it) {
                     is Resource.LOADING -> {
+                        setHasOptionsMenu(false)
                         shimmerScreen.visibility = View.VISIBLE
                         shimmerScreen.startShimmer()
                         recyclerView.visibility = View.GONE
@@ -92,8 +92,10 @@ class IndiaFragment : Fragment() {
                         shimmerScreen.stopShimmer()
                         shimmerScreen.visibility = View.GONE
                         recyclerView.visibility = View.VISIBLE
+                        setHasOptionsMenu(true)
                     }
                     is Resource.FAILURE -> {
+                        setHasOptionsMenu(false)
                         adapter.submitList(ArrayList())
                         shimmerScreen.visibility = View.GONE
                         recyclerView.visibility = View.GONE
