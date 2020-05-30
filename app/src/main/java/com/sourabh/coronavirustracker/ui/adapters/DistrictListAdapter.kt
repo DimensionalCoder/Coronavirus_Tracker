@@ -145,7 +145,8 @@ class DistrictListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val deltaDigits = getDigits(deltaCase)
 
             return if ((caseDigits > 4
-                        || caseDigits >= 2 && (deltaDigits > 2 || deltaCase < -9)
+                        || caseDigits > 3 && (deltaDigits >= 2 || deltaCase < -9)
+                        || caseDigits <= 2 && deltaDigits > 2
                         || (densityDpi >= 500 && (deltaDigits >= 2 || deltaCase < -9))
                         || densityDpi >= 540) && orientation == Configuration.ORIENTATION_PORTRAIT
             ) {
