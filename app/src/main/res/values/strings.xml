@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Coronavirus Tracker</string>
-    <string name="check">Check</string>
     <string name="india">India</string>
     <string name="global">World</string>
     <string name="total_cases">Total Cases</string>
@@ -16,12 +15,10 @@
     <string name="active_cases">Active Cases</string>
     <string name="confirmed_abbrev">Cnfrmd</string>
     <string name="recovered_abbrev">Rcvrd</string>
-    <string name="notes">Notes</string>
     <string name="deceased_abbrev">Dceasd</string>
     <string name="new_tv">New</string>
     <string name="last_updated">Last Updated:</string>
     <string name="notify">Notify</string>
-    <string name="loading_and_error">Loading And Error</string>
     <string name="connection_failed">Connection Failed</string>
     <string name="could_not_connect_to_the_network_nplease_check_and_try_again">Could not connect to the network.\nPlease check and try again.</string>
     <string name="retry">Retry</string>
