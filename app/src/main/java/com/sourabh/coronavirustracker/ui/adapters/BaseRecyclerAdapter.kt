@@ -87,7 +87,6 @@ abstract class BaseRecyclerAdapter<T>(
 
         private fun expandCardView(binding: IndianTotalListItemBinding) {
             binding.detailHeader.setOnClickListener {
-                it
                 if (binding.deltaActive.visibility == View.VISIBLE) {
                     setVisibility(View.GONE, binding)
                 } else {
