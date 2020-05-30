@@ -14,7 +14,7 @@ fun TextView.setUpdateTime(updateTime: String?) {
         val dateTime = updateTime.split(" ")
 
         text = LocalDateTime.parse(
-            "$dateTime[1] $dateTime[0",
+            "${dateTime[1]} ${dateTime[0]}",
             DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy")
         ).format(DateTimeFormatter.ofPattern("hh:mm a, dd MMM yyyy"))
     }
