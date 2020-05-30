@@ -29,7 +29,9 @@ class WorldFragment : Fragment() {
         _binding = FragmentWorldBinding.inflate(inflater)
 
         val worldDataService = WorldDataService
-        val mainRepository = MainRepository(worldDataService = worldDataService)
+        val mainRepository = MainRepository()
+        mainRepository.setWorldDataService(worldDataService)
+
         val viewModelFactory = WorldViewModelFactory(mainRepository)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(WorldViewModel::class.java)
 

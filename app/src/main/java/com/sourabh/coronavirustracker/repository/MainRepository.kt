@@ -6,24 +6,21 @@ import com.sourabh.coronavirustracker.model.WorldDataModel
 import com.sourabh.coronavirustracker.network.IndianDataService
 import com.sourabh.coronavirustracker.network.WorldDataService
 
-/**
- * Default constructor values set to null
- */
-class MainRepository(
-    private val indianDataService: IndianDataService? = null,
-    private val worldDataService: WorldDataService? = null
-) {
+class MainRepository {
+    private lateinit var indianDataService: IndianDataService
+    private lateinit var worldDataService: WorldDataService
 
-    /**
-     * These are non-null since the non-null value will be passed to the constructor
-     * from the fragment which will use the MainRepository.
-     * Only the non-null method will be used.
-     */
-    suspend fun getIndianStateData(): List<StatewiseDetails> =
-        indianDataService?.getIndianData()?.statewise!!
+    suspend fun getIndianStateData(): List<StatewiseDetails> = indianDataService.getIndianData().statewise
 
-    suspend fun getDistrictData(): List<DistrictwiseDetails> =
-        indianDataService?.getDistrictsList()!!
+    suspend fun getDistrictData(): List<DistrictwiseDetails> = indianDataService.getDistrictsList()
 
-    suspend fun getWorldData(): List<WorldDataModel> = worldDataService?.getData()!!
+    suspend fun getWorldData(): List<WorldDataModel> = worldDataService.getData()
+
+    fun setIndianDataService(indianDataService: IndianDataService) {
+        this.indianDataService = indianDataService
+    }
+
+    fun setWorldDataService(worldDataService: WorldDataService) {
+        this.worldDataService = worldDataService
+    }
 }

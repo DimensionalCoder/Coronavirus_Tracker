@@ -31,7 +31,9 @@ class IndiaFragment : Fragment() {
         _binding = FragmentIndiaBinding.inflate(inflater)
 
         val indianDataService = RetrofitBuilder.indianDataService
-        val mainRepository = MainRepository(indianDataService)
+        val mainRepository = MainRepository()
+        mainRepository.setIndianDataService(indianDataService)
+
         val viewModelFactory = IndiaViewModelFactory(mainRepository)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(IndiaViewModel::class.java)
 
