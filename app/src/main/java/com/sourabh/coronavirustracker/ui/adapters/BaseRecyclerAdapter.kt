@@ -1,7 +1,6 @@
 package com.sourabh.coronavirustracker.ui.adapters
 
 import android.content.res.Configuration
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,9 +56,8 @@ abstract class BaseRecyclerAdapter<T>(
                 R.layout.indian_total_list_item -> {
                     binding as IndianTotalListItemBinding
                     binding.data = item as StatewiseDetails
-                    Log.i("BaseRecyclerView", "$densityDpi")
+                    expandCardView(binding)
                     setIndiaBindingTVSize(binding, densityDpi, orientation)
-
                 }
                 R.layout.india_list_item -> {
                     binding as IndiaListItemBinding
@@ -87,25 +85,36 @@ abstract class BaseRecyclerAdapter<T>(
             binding.executePendingBindings()
         }
 
+        private fun expandCardView(binding: IndianTotalListItemBinding) {
+            binding.detailHeader.setOnClickListener {
+                it
+                if (binding.deltaActive.visibility == View.VISIBLE) {
+                    setVisibility(View.GONE, binding)
+                } else {
+                    setVisibility(View.VISIBLE, binding)
+                }
+            }
+        }
+
+        private fun setVisibility(visibility: Int, binding: IndianTotalListItemBinding) {
+            binding.deltaActive.visibility = visibility
+            binding.deltaRecovered.visibility = visibility
+            binding.deltaDeaths.visibility = visibility
+        }
+
         /**
          * To set the textSize when display density changes
          * AutoSizeText is a bad solution since the textView sizes don't change equally
          */
-        private fun setIndiaBindingTVSize(
-            binding: IndianTotalListItemBinding, densityDpi: Int, orientation: Int
-        ) {
+        private fun setIndiaBindingTVSize(binding: IndianTotalListItemBinding, densityDpi: Int, orientation: Int) {
             if (densityDpi in 421..460 && orientation == Configuration.ORIENTATION_PORTRAIT) {
-                val size = 28f
-                tvSize(binding, size)
+                tvSize(binding, 28f)
             } else if (densityDpi > 460 && orientation == Configuration.ORIENTATION_PORTRAIT) {
-                val size = 24f
-                tvSize(binding, size)
+                tvSize(binding, 24f)
             }
         }
 
-        private fun setWorldBindingTVSize(
-            binding: WorldTotalListItemBinding, densityDpi: Int, orientation: Int
-        ) {
+        private fun setWorldBindingTVSize(binding: WorldTotalListItemBinding, densityDpi: Int, orientation: Int) {
             if (densityDpi > 460 && orientation == Configuration.ORIENTATION_PORTRAIT) {
                 val size = 24f
                 binding.recoveredTv.textSize = size
@@ -113,9 +122,7 @@ abstract class BaseRecyclerAdapter<T>(
             }
         }
 
-        private fun setMainListItemTextSize(
-            conf: TextView, dea: TextView, rec: TextView, densityDpi: Int, orientation: Int
-        ) {
+        private fun setMainListItemTextSize(conf: TextView, dea: TextView, rec: TextView, densityDpi: Int, orientation: Int) {
             if (densityDpi > 500 && orientation == Configuration.ORIENTATION_PORTRAIT) {
                 val size = 12f
                 conf.textSize = size

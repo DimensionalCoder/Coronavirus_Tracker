@@ -17,6 +17,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        app:rippleColor="@color/transparent"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp">
 
@@ -87,7 +88,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/rBOX"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/total_cases_tv">
+                app:layout_constraintTop_toBottomOf="@+id/total_cases_tv"
+                app:layout_constraintVertical_bias="0.0">
 
                 <TextView
                     android:id="@+id/ac"
@@ -194,6 +196,50 @@
 
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/deltaActive"
+                style="@style/normal_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:drawableStart="@drawable/ic_arrow_up_white"
+                android:text="@{String.valueOf(data.deltaConfirmed)}"
+                android:textColor="@color/colorWhite"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/acBOX"
+                app:layout_constraintStart_toStartOf="@+id/acBOX"
+                app:layout_constraintTop_toBottomOf="@+id/acBOX"
+                tools:text="1000" />
+
+            <TextView
+                android:id="@+id/deltaRecovered"
+                style="@style/normal_text"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_arrow_up_white"
+                android:text="@{String.valueOf(data.deltaRecovered)}"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintBaseline_toBaselineOf="@+id/deltaActive"
+                app:layout_constraintEnd_toEndOf="@+id/rBOX"
+                app:layout_constraintStart_toStartOf="@+id/rBOX"
+                tools:text="1000" />
+
+            <TextView
+                android:id="@+id/deltaDeaths"
+                style="@style/normal_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_arrow_up_white"
+                android:text="@{String.valueOf(data.deltaDeaths)}"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintBaseline_toBaselineOf="@+id/deltaRecovered"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/dBOX"
+                app:layout_constraintStart_toStartOf="@+id/dBOX"
+                tools:text="1000" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -16,5 +16,6 @@
     <color name="colorBlack">#000000</color>
 
     <color name="shimmer_bg">#D2D2D2</color>
+    <color name="transparent">#00FFFFFF</color>
 
 </resources>
