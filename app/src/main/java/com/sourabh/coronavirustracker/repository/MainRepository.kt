@@ -16,6 +16,8 @@ class MainRepository(
 
     /**
      * These are non-null since the non-null value will be passed to the constructor
+     * from the fragment which will use the MainRepository.
+     * Only the non-null method will be used.
      */
     suspend fun getIndianStateData(): List<StatewiseDetails> =
         indianDataService?.getIndianData()?.statewise!!
