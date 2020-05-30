@@ -107,7 +107,7 @@ abstract class BaseRecyclerAdapter<T>(
          */
         private fun setIndiaBindingTVSize(binding: IndianTotalListItemBinding, densityDpi: Int, orientation: Int) {
             if (densityDpi in 421..460 && orientation == Configuration.ORIENTATION_PORTRAIT) {
-                tvSize(binding, 28f)
+                tvSize(binding)
             } else if (densityDpi > 460 && orientation == Configuration.ORIENTATION_PORTRAIT) {
                 tvSize(binding, 24f)
             }
@@ -130,7 +130,7 @@ abstract class BaseRecyclerAdapter<T>(
             }
         }
 
-        private fun tvSize(binding: IndianTotalListItemBinding, size: Float) {
+        private fun tvSize(binding: IndianTotalListItemBinding, size: Float = 28f) {
             binding.acitveCasesTv.textSize = size
             binding.recoveredTv.textSize = size
             binding.deathsTv.textSize = size
