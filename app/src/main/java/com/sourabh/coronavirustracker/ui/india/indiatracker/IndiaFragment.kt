@@ -137,13 +137,13 @@ class IndiaFragment : Fragment() {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     adapter.filter.filter(query)
-                    onActionViewCollapsed()
+                    clearFocus()
                     return true
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
                     adapter.filter.filter(newText)
-                    return true
+                    return false
                 }
             })
         }

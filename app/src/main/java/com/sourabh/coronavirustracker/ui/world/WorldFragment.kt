@@ -107,7 +107,7 @@ class WorldFragment : Fragment() {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     adapter.filter.filter(query)
-                    onActionViewCollapsed()
+                    clearFocus()
                     return true
                 }
 
