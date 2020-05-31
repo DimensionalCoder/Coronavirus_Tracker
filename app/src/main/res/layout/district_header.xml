@@ -237,6 +237,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <include
+            android:id="@+id/list_header"
             layout="@layout/district_list_item_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

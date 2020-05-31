@@ -78,11 +78,25 @@ class DistrictListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             fun from(parent: ViewGroup): HeaderViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = DistrictHeaderBinding.inflate(layoutInflater, parent, false)
-                return HeaderViewHolder(
-                    binding
-                )
+                val displayDensity = binding.root.resources.configuration.densityDpi
+
+                if (displayDensity in 500..539) {
+                    changeSizeWithDensity(12f, binding)
+                }
+                if (displayDensity > 539) {
+                    changeSizeWithDensity(binding = binding)
+                }
+                return HeaderViewHolder(binding)
+            }
+
+            fun changeSizeWithDensity(size: Float = 10f, binding: DistrictHeaderBinding) {
+                binding.listHeader.confirmedTv.textSize = size
+                binding.listHeader.recoveredTv.textSize = size
+                binding.listHeader.activeTv.textSize = size
+                binding.listHeader.deceasedTv.textSize = size
             }
         }
+
     }
 
     private class ListItemViewHolder(private val binding: DistrictListItemBinding) :
@@ -147,7 +161,7 @@ class DistrictListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             return if ((caseDigits > 4
                         || caseDigits > 3 && (deltaDigits >= 2 || deltaCase < -9)
                         || caseDigits <= 2 && deltaDigits > 2
-                        || (densityDpi >= 500 && (deltaDigits >= 2 || deltaCase < -9))
+                        || (densityDpi >= 460 && (deltaDigits >= 2 || deltaCase < -9))
                         || densityDpi >= 540) && orientation == Configuration.ORIENTATION_PORTRAIT
             ) {
                 LinearLayout.VERTICAL
