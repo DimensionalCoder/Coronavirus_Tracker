@@ -13,7 +13,7 @@ The data for the countries are taken from [Wikipedia](https://en.wikipedia.org/w
 
 <img src="https://github.com/Superblazer/Coronavirus_Tracker/blob/master/screenshots/Screenshot3.jpg" height="350">
 
-## Libraries, Languages and Concepts
+## Language, Libraries and Features
 - [Kotlin](https://kotlinlang.org/)
 - [Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
 - MVVM Architecture
