@@ -5,7 +5,7 @@ The Tracker data for India comes from [Covid19-India](https://github.com/covid19
 
 The data for the countries are taken from [Wikipedia](https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data#covid19-container).
 
-## [Download](https://github.com/Superblazer/Coronavirus_Tracker/blob/master/app-debug.apk)
+## [Download](https://github.com/Superblazer/Coronavirus_Tracker/raw/master/app-debug.apk)
 
 ## Screenshots
 
