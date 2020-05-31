@@ -1,7 +1,7 @@
 # Coronavirus Tracker
 Android app to track coronavirus.
 
-The Tracker data for India comes from [Covid19India](https://github.com/covid19india/api)
+The Tracker data for India comes from [Covid19-India](https://github.com/covid19india/api)
 
 The data for the countries are taken from [Wikipedia](https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data#covid19-container).
 
