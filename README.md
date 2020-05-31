@@ -3,7 +3,7 @@ Android app to track coronavirus.
 
 The Tracker data for India comes from [Covid19India](https://github.com/covid19india/api)
 
-Gloabal data for confirmed, recovered and death cases are taken from Wikipedia(https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data#covid19-container).
+Global data for confirmed, recovered and death cases are taken from Wikipedia(https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data#covid19-container).
 
 
 ## Libraries, Languages and Concepts
