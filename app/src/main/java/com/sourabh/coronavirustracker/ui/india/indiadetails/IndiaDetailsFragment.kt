@@ -21,14 +21,12 @@ class IndiaDetailsFragment : Fragment() {
         val binding = FragmentIndiaDetailsBinding.inflate(inflater)
 
         val arguments = IndiaDetailsFragmentArgs.fromBundle(requireArguments())
-        val viewModelFactory =
-            IndianDetailsViewModelFactory(arguments.statewiseData, arguments.districtData.toList())
-        val viewModel =
-            ViewModelProvider(this, viewModelFactory).get(IndianDetailsViewModel::class.java)
+        val viewModelFactory = IndianDetailsViewModelFactory(arguments.statewiseData, arguments.districtData.toList())
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(IndianDetailsViewModel::class.java)
 
         val recyclerView = binding.districtList
-        val adapter =
-            DistrictListAdapter()
+        val adapter = DistrictListAdapter()
+
         viewModel.listOfData.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
@@ -37,6 +35,7 @@ class IndiaDetailsFragment : Fragment() {
 
         adapter.submitList(arguments.districtData.toList())
         recyclerView.adapter = adapter
+        recyclerView.setHasFixedSize(true)
 
         return binding.root
     }
