@@ -5,6 +5,8 @@ The Tracker data for India comes from [Covid19-India](https://github.com/covid19
 
 The data for the countries are taken from [Wikipedia](https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data#covid19-container).
 
+## [Download](https://github.com/Superblazer/Coronavirus_Tracker/blob/master/app-debug.apk)
+
 ## Screenshots
 
 <img src="https://github.com/Superblazer/Coronavirus_Tracker/blob/master/screenshots/Screenshot1.jpg" height="350"><img src="https://github.com/Superblazer/Coronavirus_Tracker/blob/master/screenshots/Screenshot2.jpg" height="350">
@@ -28,4 +30,5 @@ The data for the countries are taken from [Wikipedia](https://en.wikipedia.org/w
 - [Leak Canary](https://square.github.io/leakcanary/)
 - [Fast Scroller](https://github.com/quiph/RecyclerView-FastScroller)
 
+## Lisense
 [Lisense](https://github.com/Superblazer/Coronavirus_Tracker/blob/master/LICENSE)
