@@ -1,6 +1,5 @@
 package com.sourabh.coronavirustracker.ui.india.indiatracker
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -41,7 +40,6 @@ class IndiaViewModel(private val repo: MainRepository) : ViewModel() {
 
     private suspend fun getIndianData(): Pair<Resource<List<StatewiseDetails>>, List<DistrictwiseDetails>> {
         return try {
-            Log.i("IndiaViewModel", "Recalled")
             val states = getStateData().filter { it.totalConfirmed != 0 }
             val stateAndDistricts = getDistrictData()
             Resource.SUCCESS(states) to stateAndDistricts

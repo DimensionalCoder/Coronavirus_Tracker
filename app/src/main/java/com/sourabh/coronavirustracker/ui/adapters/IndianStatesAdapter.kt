@@ -2,7 +2,6 @@
 
 package com.sourabh.coronavirustracker.ui.adapters
 
-import android.util.Log
 import android.widget.Filter
 import androidx.recyclerview.widget.DiffUtil
 import com.sourabh.coronavirustracker.R
@@ -59,7 +58,6 @@ class IndianStatesAdapter(
      */
     class OnItemClickListener(private val clickListener: (statewise: StatewiseDetails) -> Unit) {
         fun onClick(statewise: StatewiseDetails) {
-            Log.i("RVClickListener", "Item clicked: ${statewise.stateOrUT}")
             clickListener(statewise)
         }
     }
