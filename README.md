@@ -1,4 +1,4 @@
-# Coronavirus_Tracker
+# Coronavirus Tracker
 Android app to track coronavirus.
 
 
