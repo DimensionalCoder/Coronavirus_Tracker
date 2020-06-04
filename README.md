@@ -5,13 +5,15 @@ The Tracker data for India comes from [Covid19-India](https://github.com/covid19
 
 The data for the countries are taken from [Wikipedia](https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data#covid19-container).
 
+## [Download Debug Apk](https://github.com/Superblazer/Coronavirus_Tracker/raw/master/app-debug.apk)
+
 ## Screenshots
 
 <img src="https://github.com/Superblazer/Coronavirus_Tracker/blob/master/screenshots/Screenshot1.jpg" height="350"><img src="https://github.com/Superblazer/Coronavirus_Tracker/blob/master/screenshots/Screenshot2.jpg" height="350">
 
 <img src="https://github.com/Superblazer/Coronavirus_Tracker/blob/master/screenshots/Screenshot3.jpg" height="350">
 
-## Libraries, Languages and Concepts
+## Language, Libraries and Features
 - [Kotlin](https://kotlinlang.org/)
 - [Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
 - MVVM Architecture
@@ -28,4 +30,5 @@ The data for the countries are taken from [Wikipedia](https://en.wikipedia.org/w
 - [Leak Canary](https://square.github.io/leakcanary/)
 - [Fast Scroller](https://github.com/quiph/RecyclerView-FastScroller)
 
+## Lisense
 [Lisense](https://github.com/Superblazer/Coronavirus_Tracker/blob/master/LICENSE)
