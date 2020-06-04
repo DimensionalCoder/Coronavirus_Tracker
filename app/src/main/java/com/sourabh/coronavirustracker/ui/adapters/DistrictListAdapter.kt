@@ -160,7 +160,7 @@ class DistrictListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             return if ((caseDigits > 4
                         || caseDigits > 3 && (deltaDigits >= 2 || deltaCase < -9)
-                        || caseDigits <= 2 && deltaDigits > 2
+                        || caseDigits <= 3 && deltaDigits > 2
                         || (densityDpi >= 460 && (deltaDigits >= 2 || deltaCase < -9))
                         || densityDpi >= 540) && orientation == Configuration.ORIENTATION_PORTRAIT
             ) {
