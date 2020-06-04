@@ -112,6 +112,7 @@
                     android:textAlignment="center"
                     android:textAppearance="@style/Details_Title"
                     android:textColor="@color/colorWhite"
+                    android:textSize="30sp"
                     tools:text="1093" />
 
 
@@ -151,6 +152,7 @@
                     android:textAlignment="center"
                     android:textAppearance="@style/Details_Title"
                     android:textColor="@color/colorWhite"
+                    android:textSize="30sp"
                     tools:text="1213" />
 
 
@@ -191,6 +193,7 @@
                     android:textAlignment="center"
                     android:textAppearance="@style/Details_Title"
                     android:textColor="@color/colorWhite"
+                    android:textSize="30sp"
                     tools:text="223" />
 
 
