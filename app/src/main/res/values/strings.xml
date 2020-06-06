@@ -4,7 +4,6 @@
     <string name="global">World</string>
     <string name="total_cases">Total Cases</string>
     <string name="_1827126">1827126</string>
-    <string name="_30000">30000</string>
 
     <!-- from the api source-->
     <string name="recovered">Recovered</string>
