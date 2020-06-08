@@ -1,12 +1,14 @@
 # Coronavirus Tracker
 Android app to track coronavirus.
+This project was made for the 30 Days of Kotlin with Google Developers event.
+
+30 Days of Kotlin with Google Developers was an initiative to improve our understanding of Kotlin and to apply it in real projects using Google resources (codelabs, sessions with Googlers) between 7th May - 7th of June.
 
 The Tracker data for India comes from [Covid19-India](https://github.com/covid19india/api)
 
 The data for the countries are taken from [Wikipedia](https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data#covid19-container).
 
 ## [Download Debug Apk](https://github.com/Superblazer/Coronavirus_Tracker/raw/master/app-debug.apk)
-(Fixed Bug, Please update to this version)
 
 ## Screenshots
 
