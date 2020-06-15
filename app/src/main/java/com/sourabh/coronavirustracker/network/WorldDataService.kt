@@ -34,9 +34,9 @@ object WorldDataService {
     ) {
         val totalString = document.select("#thetable tr.sorttop")
         for (ele in totalString) {
-            val totalCases = getCaseData(ele, "th:nth-child(2)")
-            val totalDeath = getCaseData(ele, "th:nth-child(3)")
-            val totalRecovered = getRecovered(ele, "th:nth-child(4)")
+            val totalCases = getCaseData(ele, "th:nth-child(3)")
+            val totalDeath = getCaseData(ele, "th:nth-child(4)")
+            val totalRecovered = getRecovered(ele, "th:nth-child(5)")
 
             worldDataList.add(
                 WorldDataModel(
