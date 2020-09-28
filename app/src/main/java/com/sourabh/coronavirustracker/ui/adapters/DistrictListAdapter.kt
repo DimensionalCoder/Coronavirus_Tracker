@@ -129,7 +129,7 @@ class DistrictListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
              */
             if (!item.notes.isNullOrBlank()) {
                 val district = binding.district
-                district.setTextColor(ContextCompat.getColor(district.context, R.color.colorWhite))
+                district.setTextColor(ContextCompat.getColor(district.context, R.color.colorAccent))
                 binding.ll.setOnClickListener {
                     Snackbar.make(binding.root, item.notes.toString(), Snackbar.LENGTH_LONG)
                         .setUpSnackbar()

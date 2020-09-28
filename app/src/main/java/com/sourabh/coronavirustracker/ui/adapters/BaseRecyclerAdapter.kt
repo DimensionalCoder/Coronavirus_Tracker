@@ -130,7 +130,7 @@ abstract class BaseRecyclerAdapter<T>(
             }
         }
 
-        private fun tvSize(binding: IndianTotalListItemBinding, size: Float = 28f) {
+        private fun tvSize(binding: IndianTotalListItemBinding, size: Float = 22f) {
             binding.acitveCasesTv.textSize = size
             binding.recoveredTv.textSize = size
             binding.deathsTv.textSize = size
